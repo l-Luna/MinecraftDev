@@ -31,6 +31,8 @@ class FabricModule internal constructor(facet: MinecraftFacet) : AbstractModule(
 
     var fabricJson by nullable { facet.findFile(FabricConstants.FABRIC_MOD_JSON, SourceType.RESOURCE) }
         private set
+	var accessWidenerFile by nullable { facet.findFile({str -> str.endsWith(FabricConstants.ACCESS_WIDENER_EXTENSION)}, SourceType.RESOURCE) }
+		private set
 
     override val moduleType = FabricModuleType
     override val type = PlatformType.FABRIC

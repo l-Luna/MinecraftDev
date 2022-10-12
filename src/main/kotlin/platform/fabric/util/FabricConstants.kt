@@ -19,4 +19,6 @@ object FabricConstants {
     const val ENVIRONMENT_ANNOTATION = "net.fabricmc.api.Environment"
     const val ENV_TYPE = "net.fabricmc.api.EnvType"
     const val ENVIRONMENT_INTERFACE_ANNOTATION = "net.fabricmc.api.EnvironmentInterface"
+	
+	const val ACCESS_WIDENER_EXTENSION = ".accesswidener"
 }

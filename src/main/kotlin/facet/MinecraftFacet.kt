@@ -198,17 +198,19 @@ class MinecraftFacet(
                 else -> PlatformAssets.MINECRAFT_ICON
             }
         }
-
-    fun findFile(path: String, type: SourceType): VirtualFile? {
+	
+	fun findFile(path: String, type: SourceType): VirtualFile? = findFile({str -> str == path}, type)
+	
+    fun findFile(predicate: (String) -> Boolean, type: SourceType): VirtualFile? {
         try {
-            return findFile0(path, type)
+            return findFile0(predicate, type)
         } catch (ignored: RefreshRootsException) {
         }
 
         updateRoots()
 
         return try {
-            findFile0(path, type)
+            findFile0(predicate, type)
         } catch (ignored: RefreshRootsException) {
             // Well we tried our best
             null
@@ -218,7 +220,7 @@ class MinecraftFacet(
     private class RefreshRootsException : Exception()
 
     @Throws(RefreshRootsException::class)
-    private fun findFile0(path: String, type: SourceType): VirtualFile? {
+    private fun findFile0(predicate: (String) -> Boolean, type: SourceType): VirtualFile? {
         val roots = roots[type]
 
         for (root in roots) {
@@ -226,7 +228,9 @@ class MinecraftFacet(
             if (!r.isValid) {
                 throw RefreshRootsException()
             }
-            return r.findFileByRelativePath(path) ?: continue
+			// TODO: does not consider relative paths! only filenames!
+			// split into two methods?
+			return r.children.firstOrNull {file -> predicate(file.name)} ?: continue
         }
 
         return null
