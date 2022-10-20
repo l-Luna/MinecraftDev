@@ -28,26 +28,7 @@ import com.intellij.psi.PsiReference
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 
-class CopyAwAction : AnAction() {
-
-    override fun actionPerformed(e: AnActionEvent) {
-        val data = getDataFromActionEvent(e) ?: return showBalloon("Unknown failure", e)
-        val editor = data.editor
-
-        val element = data.element
-        if (element !is PsiIdentifier) {
-            showBalloon("Invalid element", e)
-            return
-        }
-
-        val target = when (val parent = element.parent) {
-            is PsiMember -> parent
-            is PsiReference -> parent.resolve()
-            else -> null
-        } ?: return showBalloon("Invalid element", e)
-
-        doCopy(target, element, editor, e)
-    }
+class CopyAwAction {
 
     companion object {
 

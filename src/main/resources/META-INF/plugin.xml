@@ -957,9 +957,9 @@
                 description="Find the associated SRG mapping for this element">
             <add-to-group relative-to-action="EditorPopupMenu2" anchor="after" group-id="EditorPopupMenu2"/>
         </action>
-        <action class="com.demonwav.mcdev.platform.mcp.actions.CopyAtAction" id="CopyATAction"
-                text="AT Entry"
-                description="Copy the reference to clipboard in Access Transformer format">
+        <action class="com.demonwav.mcdev.platform.accessors.actions.CopyAccessControllerEntryAction" id="CopyAcEntryAction"
+                text="AT/AW Entry"
+                description="Copy the reference to clipboard in an access controller format">
             <add-to-group relative-to-action="CopyReference" anchor="after" group-id="Copy.Paste.Special"/>
         </action>
         <action class="com.demonwav.mcdev.platform.mcp.actions.GotoAtEntryAction" id="GotoAtEntry"
@@ -990,11 +990,6 @@
         <action class="com.demonwav.mcdev.insight.generation.MinecraftClassCreateAction" id="CreateMinecraftClass"
                 text="Minecraft Class" description="Create skeleton classes used in Minecraft Mods">
             <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFile" />
-        </action>
-        <action class="com.demonwav.mcdev.platform.mcp.actions.CopyAwAction" id="CopyAWAction"
-                text="AW Entry"
-                description="Copy the reference to clipboard in Access Widener format">
-            <add-to-group relative-to-action="CopyATAction" anchor="after" group-id="Copy.Paste.Special"/>
         </action>
     </actions>
 </idea-plugin>
