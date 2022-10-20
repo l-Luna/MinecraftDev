@@ -51,38 +51,38 @@ interface AtEntryMixin : AtElement, AccessControlEntry {
             else -> addAfter(className, element)
         }
     }
-	
-	override fun modifiers(): List<AccessModifier> {
-		val modifiers = ArrayList<AccessModifier>(2)
-		var kwText = keyword.keywordValue.text
-		if(kwText.endsWith("+f"))
-			modifiers += AccessModifier.TO_FINAL
-		else if(kwText.endsWith("-f"))
-			modifiers += AccessModifier.TO_NON_FINAL
-		
-		if(modifiers.size > 0)
-			kwText = kwText.substring(2)
-		when(kwText){
-			"private" -> modifiers += AccessModifier.TO_PRIVATE
-			"protected" -> modifiers += AccessModifier.TO_PROTECTED
-			"default" -> modifiers += AccessModifier.TO_PACKAGE_LOCAL
-			"public" -> modifiers += AccessModifier.TO_PUBLIC
-		}
-		
-		return modifiers
-	}
-	
-	override fun target(): PsiElement? {
-		// TODO: deduplicate with AtGotoDeclarationHandler
-		val module = ModuleUtilCore.findModuleForPsiElement(this) ?: return null
-		val instance = MinecraftFacet.getInstance(module) ?: return null
-		val mcpModule = instance.getModuleOfType(McpModuleType) ?: return null
-		val srgMap = mcpModule.srgManager?.srgMapNow ?: return null
-		
-		return when {
-			fieldName != null -> srgMap.mapToMcpField(AtMemberReference.get(this as AtEntry, fieldName!!) ?: return null).resolveMember(project)
-			function != null -> srgMap.mapToMcpMethod(AtMemberReference.get(this as AtEntry, function!!) ?: return null).resolveMember(project)
-			else -> findQualifiedClass(project, srgMap.mapToMcpClass(className.classNameText))
-		}
-	}
+
+    override fun modifiers(): List<AccessModifier> {
+        val modifiers = ArrayList<AccessModifier>(2)
+        var kwText = keyword.keywordValue.text
+        if (kwText.endsWith("+f"))
+            modifiers += AccessModifier.TO_FINAL
+        else if (kwText.endsWith("-f"))
+            modifiers += AccessModifier.TO_NON_FINAL
+
+        if (modifiers.size > 0)
+            kwText = kwText.substring(2)
+        when (kwText) {
+            "private" -> modifiers += AccessModifier.TO_PRIVATE
+            "protected" -> modifiers += AccessModifier.TO_PROTECTED
+            "default" -> modifiers += AccessModifier.TO_PACKAGE_LOCAL
+            "public" -> modifiers += AccessModifier.TO_PUBLIC
+        }
+
+        return modifiers
+    }
+
+    override fun target(): PsiElement? {
+        // TODO: deduplicate with AtGotoDeclarationHandler
+        val module = ModuleUtilCore.findModuleForPsiElement(this) ?: return null
+        val instance = MinecraftFacet.getInstance(module) ?: return null
+        val mcpModule = instance.getModuleOfType(McpModuleType) ?: return null
+        val srgMap = mcpModule.srgManager?.srgMapNow ?: return null
+
+        return when {
+            fieldName != null -> srgMap.mapToMcpField(AtMemberReference.get(this as AtEntry, fieldName!!) ?: return null).resolveMember(project)
+            function != null -> srgMap.mapToMcpMethod(AtMemberReference.get(this as AtEntry, function!!) ?: return null).resolveMember(project)
+            else -> findQualifiedClass(project, srgMap.mapToMcpClass(className.classNameText))
+        }
+    }
 }

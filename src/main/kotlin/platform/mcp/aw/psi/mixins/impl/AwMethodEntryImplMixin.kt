@@ -22,13 +22,13 @@ abstract class AwMethodEntryImplMixin(node: ASTNode) : AwEntryImplMixin(node), A
 
     override val methodDescriptor: String?
         get() = findChildByType<PsiElement>(AwTypes.METHOD_DESC)?.text
-	
-	override fun target(): PsiElement? {
-		val name = methodName ?: return null
-		val desc = methodDescriptor
-		val owner = targetClassName?.replace('/', '.')
-		return MemberReference(name, desc, owner).resolveMember(project, resolveScope)
-			// fallback if descriptor is invalid
-			?: MemberReference(name, null, owner).resolveMember(project, resolveScope)
-	}
+
+    override fun target(): PsiElement? {
+        val name = methodName ?: return null
+        val desc = methodDescriptor
+        val owner = targetClassName?.replace('/', '.')
+        return MemberReference(name, desc, owner).resolveMember(project, resolveScope)
+            // fallback if descriptor is invalid
+            ?: MemberReference(name, null, owner).resolveMember(project, resolveScope)
+    }
 }

@@ -1,15 +1,24 @@
+/*
+ * Minecraft Dev for IntelliJ
+ *
+ * https://minecraftdev.org
+ *
+ * Copyright (c) 2022 minecraft-dev
+ *
+ * MIT License
+ */
+
 package com.demonwav.mcdev.platform.accessors
 
 import com.demonwav.mcdev.platform.accessors.psi.AccessControlEntry
-import com.jetbrains.rd.util.getOrCreate
 
 /**
  * A file of an access controller language, exposing common features for use by inspections and tools.
  */
 interface AccessControllerFile {
-	
-	fun entries(): List<AccessControlEntry>
-	
+
+    fun entries(): List<AccessControlEntry>
+
 	/*
 	fun entriesByModifier(): Map<AccessModifier, List<AccessControlEntry>> {
 		val entries = entries()
@@ -20,6 +29,6 @@ interface AccessControllerFile {
 		return byModifiers
 	}
 	*/
-	
-	// fun addEntry...
+
+    // fun addEntry...
 }

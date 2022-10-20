@@ -30,6 +30,6 @@ class AwFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, AwLangu
     override fun getFileType() = AwFileType
     override fun toString() = "Access Widener File"
     override fun getIcon(flags: Int) = PlatformAssets.MCP_ICON
-	
+
     override fun entries(): List<AccessControlEntry> = ArrayList(entries)
 }

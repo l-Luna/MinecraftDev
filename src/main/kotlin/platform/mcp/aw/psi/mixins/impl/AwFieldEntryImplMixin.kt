@@ -22,10 +22,10 @@ abstract class AwFieldEntryImplMixin(node: ASTNode) : AwEntryImplMixin(node), Aw
 
     override val fieldDescriptor: String?
         get() = findChildByType<PsiElement>(AwTypes.FIELD_DESC)?.text
-	
-	override fun target(): PsiElement? {
-		val name = fieldName ?: return null
-		val owner = targetClassName?.replace('/', '.')
-		return MemberReference(name, null, owner).resolveMember(project, resolveScope)
-	}
+
+    override fun target(): PsiElement? {
+        val name = fieldName ?: return null
+        val owner = targetClassName?.replace('/', '.')
+        return MemberReference(name, null, owner).resolveMember(project, resolveScope)
+    }
 }

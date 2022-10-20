@@ -19,27 +19,27 @@ import com.intellij.psi.PsiField
 import com.intellij.psi.PsiMethod
 
 object AtLanguage : Language("Access Transformers"), AccessControllerLanguage {
-	
-	override fun shortName(): String = "AT"
-	
-	override fun createEntryText(target: PsiElement): String? {
-		return target.findMcpModule()?.srgManager?.srgMap?.then {
-			return@then when(target) {
-				is PsiClass -> it.getSrgClass(target)
-				is PsiField -> {
-					val containing = target.containingClass ?: return@then null
-					val classSrg = it.getSrgClass(containing) ?: return@then null
-					val srg = it.getSrgField(target) ?: return@then null
-					"$classSrg ${srg.name} # ${target.name}"
-				}
-				is PsiMethod -> {
-					val containing = target.containingClass ?: return@then null
-					val classSrg = it.getSrgClass(containing) ?: return@then null
-					val srg = it.getSrgMethod(target) ?: return@then null
-					"$classSrg ${srg.name}${srg.descriptor} # ${target.name}"
-				}
-				else -> null
-			}
-		}?.blockingGet(1)
-	}
+
+    override fun shortName(): String = "AT"
+
+    override fun createEntryText(target: PsiElement): String? {
+        return target.findMcpModule()?.srgManager?.srgMap?.then {
+            return@then when (target) {
+                is PsiClass -> it.getSrgClass(target)
+                is PsiField -> {
+                    val containing = target.containingClass ?: return@then null
+                    val classSrg = it.getSrgClass(containing) ?: return@then null
+                    val srg = it.getSrgField(target) ?: return@then null
+                    "$classSrg ${srg.name} # ${target.name}"
+                }
+                is PsiMethod -> {
+                    val containing = target.containingClass ?: return@then null
+                    val classSrg = it.getSrgClass(containing) ?: return@then null
+                    val srg = it.getSrgMethod(target) ?: return@then null
+                    "$classSrg ${srg.name}${srg.descriptor} # ${target.name}"
+                }
+                else -> null
+            }
+        }?.blockingGet(1)
+    }
 }

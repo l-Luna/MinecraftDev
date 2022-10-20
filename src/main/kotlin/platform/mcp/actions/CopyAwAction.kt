@@ -13,18 +13,13 @@ package com.demonwav.mcdev.platform.mcp.actions
 import com.demonwav.mcdev.platform.mcp.actions.SrgActionBase.Companion.showBalloon
 import com.demonwav.mcdev.platform.mcp.actions.SrgActionBase.Companion.showSuccessBalloon
 import com.demonwav.mcdev.util.descriptor
-import com.demonwav.mcdev.util.getDataFromActionEvent
 import com.demonwav.mcdev.util.internalName
-import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiField
-import com.intellij.psi.PsiIdentifier
-import com.intellij.psi.PsiMember
 import com.intellij.psi.PsiMethod
-import com.intellij.psi.PsiReference
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 
