@@ -11,13 +11,15 @@
 package com.demonwav.mcdev.platform.mcp.aw
 
 import com.demonwav.mcdev.asset.PlatformAssets
+import com.demonwav.mcdev.platform.accessors.AccessControllerFile
+import com.demonwav.mcdev.platform.accessors.psi.AccessControlEntry
 import com.demonwav.mcdev.platform.mcp.aw.gen.psi.AwHeader
 import com.demonwav.mcdev.platform.mcp.aw.psi.mixins.AwEntryMixin
 import com.demonwav.mcdev.util.childrenOfType
 import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.psi.FileViewProvider
 
-class AwFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, AwLanguage) {
+class AwFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, AwLanguage), AccessControllerFile {
 
     val header: AwHeader?
         get() = children.first { it is AwHeader } as? AwHeader
@@ -28,4 +30,6 @@ class AwFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, AwLangu
     override fun getFileType() = AwFileType
     override fun toString() = "Access Widener File"
     override fun getIcon(flags: Int) = PlatformAssets.MCP_ICON
+	
+    override fun entries(): List<AccessControlEntry> = ArrayList(entries)
 }

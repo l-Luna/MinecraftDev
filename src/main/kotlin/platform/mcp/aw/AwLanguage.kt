@@ -10,6 +10,7 @@
 
 package com.demonwav.mcdev.platform.mcp.aw
 
+import com.demonwav.mcdev.platform.accessors.AccessControllerLanguage
 import com.intellij.lang.Language
 
-object AwLanguage : Language("Access Widener")
+object AwLanguage : Language("Access Widener"), AccessControllerLanguage

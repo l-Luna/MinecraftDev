@@ -291,6 +291,9 @@
         <attachSourcesProvider implementation="com.demonwav.mcdev.platform.mcp.fabricloom.FabricLoomDecompileSourceProvider" />
         <attachSourcesProvider implementation="com.demonwav.mcdev.platform.mcp.vanillagradle.VanillaGradleDecompileSourceProvider" />
 
+        <!-- shared accessor file type -->
+        <metaLanguage implementation="com.demonwav.mcdev.platform.accessors.AccessorMetaLanguage"/>
+
         <!-- access transformer file type -->
         <fileType name="Access Transformers" language="Access Transformers" implementationClass="com.demonwav.mcdev.platform.mcp.at.AtFileType" fieldName="INSTANCE" patterns="*_at.cfg" />
         <lang.parserDefinition language="Access Transformers" implementationClass="com.demonwav.mcdev.platform.mcp.at.AtParserDefinition"/>
@@ -575,13 +578,13 @@
                          level="WARNING"
                          hasStaticDescription="true"
                          implementationClass="com.demonwav.mcdev.platform.mcp.inspections.StackEmptyInspection"/>
-        <localInspection displayName="Duplicate access widener"
+        <localInspection displayName="Duplicate access controller entry"
                          groupName="MCP"
-                         language="Access Widener"
+                         language="MC Access Controllers"
                          enabledByDefault="true"
                          level="WARNING"
                          hasStaticDescription="true"
-                         implementationClass="com.demonwav.mcdev.platform.mcp.aw.inspections.DuplicateAwEntryInspection"/>
+                         implementationClass="com.demonwav.mcdev.platform.accessors.inspections.DuplicateAccessControllerEntryInspection"/>
         <!--endregion-->
 
         <!--region MIXIN INSPECTIONS-->

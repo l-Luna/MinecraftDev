@@ -10,6 +10,7 @@
 
 package com.demonwav.mcdev.platform.mcp.aw.psi.mixins.impl
 
+import com.demonwav.mcdev.platform.accessors.AccessModifier
 import com.demonwav.mcdev.platform.mcp.aw.gen.psi.AwTypes
 import com.demonwav.mcdev.platform.mcp.aw.psi.mixins.AwEntryMixin
 import com.intellij.extapi.psi.ASTWrapperPsiElement
@@ -23,4 +24,12 @@ abstract class AwEntryImplMixin(node: ASTNode) : ASTWrapperPsiElement(node), AwE
 
     override val targetClassName: String?
         get() = findChildByType<PsiElement>(AwTypes.CLASS_NAME)?.text
+	
+	override fun modifiers(): List<AccessModifier> {
+		return when(accessKind){
+			"accessible", "accessible-transitive" -> listOf(AccessModifier.TO_PUBLIC)
+			"mutable", "mutable-transitive", "extendable", "extendable-transitive" -> listOf(AccessModifier.TO_NON_FINAL)
+			else -> listOf()
+		}
+	}
 }

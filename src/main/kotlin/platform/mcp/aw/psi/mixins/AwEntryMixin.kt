@@ -10,9 +10,10 @@
 
 package com.demonwav.mcdev.platform.mcp.aw.psi.mixins
 
+import com.demonwav.mcdev.platform.accessors.psi.AccessControlEntry
 import com.demonwav.mcdev.platform.mcp.aw.psi.AwElement
 
-interface AwEntryMixin : AwElement {
+interface AwEntryMixin : AwElement, AccessControlEntry {
 
     val accessKind: String?
     val targetClassName: String?

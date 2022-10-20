@@ -14,7 +14,6 @@ import com.demonwav.mcdev.platform.mcp.aw.gen.psi.AwFieldEntry
 import com.demonwav.mcdev.platform.mcp.aw.gen.psi.AwMethodEntry
 import com.demonwav.mcdev.platform.mcp.aw.psi.mixins.AwEntryMixin
 import com.demonwav.mcdev.platform.mcp.aw.psi.mixins.AwMemberNameMixin
-import com.demonwav.mcdev.util.MemberReference
 import com.demonwav.mcdev.util.cached
 import com.intellij.codeInsight.completion.JavaLookupElementBuilder
 import com.intellij.extapi.psi.ASTWrapperPsiElement
@@ -40,22 +39,7 @@ abstract class AwMemberNameImplMixin(node: ASTNode) : ASTWrapperPsiElement(node)
 
     override fun resolve(): PsiElement? = cached(PsiModificationTracker.MODIFICATION_COUNT) {
         val entry = this.parentOfType<AwEntryMixin>() ?: return@cached null
-        val owner = entry.targetClassName?.replace('/', '.')
-        return@cached when (entry) {
-            is AwMethodEntry -> {
-                val name = entry.methodName ?: return@cached null
-                val desc = entry.methodDescriptor
-                MemberReference(name, desc, owner).resolveMember(project, resolveScope)
-                    // fallback if descriptor is invalid
-                    ?: MemberReference(name, null, owner).resolveMember(project, resolveScope)
-            }
-            is AwFieldEntry -> {
-                val name = entry.fieldName ?: return@cached null
-                MemberReference(name, null, owner)
-                    .resolveMember(project, resolveScope)
-            }
-            else -> null
-        }
+        return@cached entry.target()
     }
 
     override fun getVariants(): Array<*> {
