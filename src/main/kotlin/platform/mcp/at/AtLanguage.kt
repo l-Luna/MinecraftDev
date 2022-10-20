@@ -30,13 +30,13 @@ object AtLanguage : Language("Access Transformers"), AccessControllerLanguage {
 					val containing = target.containingClass ?: return@then null
 					val classSrg = it.getSrgClass(containing) ?: return@then null
 					val srg = it.getSrgField(target) ?: return@then null
-					return@then "$classSrg ${srg.name} # ${target.name}"
+					"$classSrg ${srg.name} # ${target.name}"
 				}
 				is PsiMethod -> {
 					val containing = target.containingClass ?: return@then null
 					val classSrg = it.getSrgClass(containing) ?: return@then null
 					val srg = it.getSrgMethod(target) ?: return@then null
-					return@then "$classSrg ${srg.name}${srg.descriptor} # ${target.name}"
+					"$classSrg ${srg.name}${srg.descriptor} # ${target.name}"
 				}
 				else -> null
 			}
